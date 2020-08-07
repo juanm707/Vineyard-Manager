@@ -1,9 +1,11 @@
 .App {
   text-align: center;
 }
-
+.App h1, h3 {
+  color: #380e5a;
+}
 .App-logo {
-  height: 40vmin;
+  height: 30vmin;
   pointer-events: none;
 }
 
@@ -14,7 +16,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #bea2d2;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +37,75 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.login-container {
+  display: grid;
+  color: #380e5a;
+}
+
+.login-sub-container button {
+  margin-top: 1em;
+  box-shadow:inset 0px 1px 0px 0px #e184f3;
+  background-color: #af15cb;
+  border-radius:6px;
+  border:1px solid #a511c0;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:6px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #9b14b3;
+}
+
+.login-sub-container button:hover  {
+  background-color: #790590;
+}
+.login-sub-container button:active  {
+  position:relative;
+  top:1px;
+}
+
+.login-container button {
+  margin-top: 1em;
+  box-shadow:inset 0px 1px 0px 0px #caefab;
+  background-color:#77d42a;
+  border-radius:6px;
+  border:1px solid #268a16;
+  display:inline-block;
+  cursor:pointer;
+  color:#306108;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:6px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #aade7c;
+}
+.login-container button:hover {
+  background-color:#5cb811;
+}
+.login-container button:active {
+  position:relative;
+  top:1px;
+}
+.login-sub-container {
+  display: grid;
+}
+
+.login-sub-container .psw {
+  color: #380e5a;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
