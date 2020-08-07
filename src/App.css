@@ -109,3 +109,7 @@ input[type=text], input[type=password] {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+#remember {
+  margin-top: 10px;
+}
