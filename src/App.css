@@ -113,3 +113,45 @@ input[type=text], input[type=password] {
 #remember {
   margin-top: 10px;
 }
+
+.Vineyards {
+  border: white;
+  border-style: solid;
+  padding: 5px;
+  background: white;
+  border-radius: 35px;
+  margin: 5px;
+  box-shadow: 0px 17px 39px 5px rgba(70, 9, 97, 0.58);
+}
+
+.VineyardBox {
+  /* remove border */
+  float: left;
+  width: 33.33%;
+  color: black;
+  box-shadow: 0px 17px 39px 5px rgba(0,0,0,0.56);
+  border-radius: 35px;
+}
+
+.VineyardBox-Img {
+  width: 100%;
+}
+
+.VineyardBox-Img img{
+  width: 100%;
+  border-radius: 35px 35px 1px 1px;;
+}
+
+@media screen and (max-width: 600px) {
+  .VineyardBox {
+    width: 100%;
+  }
+}
+
+.VineyardBox-Text {
+  font-family: 'Recursive', sans-serif;
+}
+
+#VineyardName {
+  font-size: 1.3em;
+}
