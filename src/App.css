@@ -3,6 +3,7 @@
 }
 .App h1, h3 {
   color: #380e5a;
+  font-family: 'Montaga', serif;
 }
 .App-logo {
   height: 30vmin;
@@ -122,15 +123,31 @@ input[type=text], input[type=password] {
   border-radius: 35px;
   margin: 5px;
   box-shadow: 0px 17px 39px 5px rgba(70, 9, 97, 0.58);
+
+  animation: fadeIn ease 3s;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
 }
 
 .VineyardBox {
   /* remove border */
   float: left;
-  width: 33.33%;
+  width: 31.81%;
   color: black;
   box-shadow: 0px 17px 39px 5px rgba(0,0,0,0.56);
   border-radius: 35px;
+  margin: 10px;
+  transition: transform 0.5s, background 0.5s ease-in, color 0.4s ease-in;
+}
+
+.VineyardBox:hover {
+  transform: scale(1.05);
+  background: #380e5a;
+  color: white;
+  box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.56);
 }
 
 .VineyardBox-Img {
@@ -145,6 +162,8 @@ input[type=text], input[type=password] {
 @media screen and (max-width: 600px) {
   .VineyardBox {
     width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
   }
 }
 

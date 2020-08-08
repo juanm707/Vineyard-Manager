@@ -4,7 +4,7 @@ import '../App.css';
 const VineyardBox = ({vyData}) => {
     //console.log(vyData.vineyards[0].imgUrl);
     return (
-        <div className="VineyardBox">
+        <div className="VineyardBox" onClick="#" style={{cursor: 'pointer'}}>
             <div className="VineyardBox-Img">
                 <img src={vyData.imgUrl} alt={vyData.name + "Vineyard"}/>
             </div>
