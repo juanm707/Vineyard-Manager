@@ -45,7 +45,7 @@
   color: #380e5a;
 }
 
-.login-sub-container button {
+.login-sub-container button, .VineyardInfoBox-Buttons button {
   margin-top: 1em;
   box-shadow:inset 0px 1px 0px 0px #e184f3;
   background-color: #af15cb;
@@ -62,7 +62,7 @@
   text-shadow:0px 1px 0px #9b14b3;
 }
 
-.login-sub-container button:hover  {
+.login-sub-container button:hover, .VineyardInfoBox-Buttons button:hover {
   background-color: #790590;
 }
 .login-sub-container button:active  {
@@ -123,17 +123,53 @@ input[type=text], input[type=password] {
   border-radius: 35px;
   margin: 5px;
   box-shadow: 0px 17px 39px 5px rgba(70, 9, 97, 0.58);
-
   animation: fadeIn ease 3s;
 }
 
+.VineyardInfoBox {
+    border: white;
+    border-style: solid;
+    padding: 5px;
+    background: white;
+    border-radius: 35px;
+    margin: 5px;
+    box-shadow: 0px 17px 39px 5px rgba(70, 9, 97, 0.58);
+}
+
+.VineyardInfoBox h2 {
+  color: #380e5a;
+  font-family: 'Montaga', serif;
+  float: left;
+  margin-top: 0;
+}
+
+.VineyardInfoBox-Buttons {
+  float: right;
+}
+
+.VineyardInfoBox-Buttons button {
+  margin: 0.3em;
+}
+
+.VineyardInfoBox-Buttons button:active {
+  box-shadow:inset 0px 1px 0px 0px #caefab;
+  background-color:#77d42a;
+  border-radius:6px;
+  border:1px solid #268a16;
+  cursor:pointer;
+  color:#306108;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #aade7c;
+}
 @keyframes fadeIn {
   0% {opacity:0;}
   100% {opacity:1;}
 }
 
 .VineyardBox {
-  /* remove border */
   float: left;
   width: 31.81%;
   color: black;
@@ -171,13 +207,25 @@ input[type=text], input[type=password] {
   .VineyardBox:hover {
     transform: scale(1.01);
   }
+
+  .VineyardInfoBox {
+    display: grid;
+  }
+
+  .VineyardInfoBox h2 {
+    margin: 0.8em;
+  }
 }
 
 .VineyardBox-Text {
-  font-family: 'Recursive', sans-serif;
-  height: 50%;
+    font-family: 'Recursive', sans-serif;
+    height: 50%;
 }
 
 #VineyardName {
-  font-size: 1.3em;
+    font-size: 1.3em;
+}
+
+#CompanyName {
+    animation: fadeIn ease 3s;
 }

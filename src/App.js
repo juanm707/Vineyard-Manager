@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-//import logo from './logo.svg';
 import logo from './grape_purpback.svg'
 import './App.css';
 import Login from "./components/Login.js";

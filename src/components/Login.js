@@ -27,7 +27,7 @@ const Login = ({logOn, setLogOn, uName}) => {
         setUserName(uName);
     }
 
-        return ( logOn ? <h3>{userName}</h3> :
+        return ( logOn ? <h3 id="CompanyName">{userName}</h3> :
             <div className="login">
                 <form>
                     <div className="login-container">
