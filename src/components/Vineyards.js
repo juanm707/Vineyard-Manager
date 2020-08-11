@@ -3,7 +3,7 @@ import '../App.css';
 //import MapView from "./MapView";
 import * as L from 'leaflet';
 //import {Circle, Map, Marker, Polygon, Popup, TileLayer} from "react-leaflet";
-import Map from './MapView';
+import Map from './Map';
 
 const VineyardBox = ({vyData, displayVineyards, setV}) => {
     //console.log(vyData.vineyards[0].imgUrl);
@@ -77,31 +77,6 @@ const Vineyards = ({vineyardData}) => {
         );
     } else {
 
-        const createMap = () => {
-            console.log('createMap function');
-
-            var mapDiv = document.getElementById('map');
-            mapDiv.style.width = '100%';
-            mapDiv.style.height = '500px';
-
-            setOptions([true, false, false])
-
-            const vineyardCoords = [vineyardToBeDisplayed.vineCenterCoords.lat, vineyardToBeDisplayed.vineCenterCoords.lng];
-            var map = L.map('map').setView(vineyardCoords, 17);
-
-            L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
-                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-            }).addTo(map)
-
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
-               attribution:  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-            }).addTo(map);
-
-            L.marker(vineyardCoords).addTo(map)
-                .bindPopup(vineyardToBeDisplayed.name)
-                .openPopup();
-        }
-
         const backToVineyards = () => {
             setDisplayVineyards(true);
             setOptions([false, false, false]);
@@ -115,14 +90,14 @@ const Vineyards = ({vineyardData}) => {
                     <h2>{vineyardToBeDisplayed.name}</h2>
                     <div className="VineyardInfoBox-Buttons">
                         <button type="submit" style={options[0] ? greenSelectedStyle : null}
-                                onClick={() => createMap()}>Map</button>
+                                onClick={() => Map({setOptions, vineyardToBeDisplayed})}>Map</button>
                         <button type="submit" style={options[1] ? greenSelectedStyle : null}
                                 onClick={() => setOptions([false, true, false])}>Leaf Water Potentials</button>
                         <button type="submit" style={options[2] ? greenSelectedStyle : null}
                                 onClick={() => setOptions([false, false, true])}>Crop Estimates</button>
                     </div>
                 </div>
-                <Map />
+                <div id='map'/>
                 <button style={!options[0] ? ({float: 'left'}) : null } className="BackButton" onClick={() => {backToVineyards()}}>Back to vineyards</button>
             </div>
         );
