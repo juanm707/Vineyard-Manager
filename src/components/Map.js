@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
 import '../App.css';
 import * as L from 'leaflet';
+
+const sensorIcon = 'https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_60,h_60/https://dashboard.snapcraft.io/site_media/appmedia/2018/11/indicator-sensors_r8EdpLP.png';
+const warnIcon = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Page_issue_icon_-_medium.svg/200px-Page_issue_icon_-_medium.svg.png';
 
 const Map = ({setOptions, vineyardToBeDisplayed}) => {
 
@@ -24,6 +26,25 @@ const Map = ({setOptions, vineyardToBeDisplayed}) => {
     L.marker(vineyardCoords).addTo(map)
         .bindPopup(vineyardToBeDisplayed.name)
         .openPopup();
+
+    //console.log(vineyardToBeDisplayed);
+    const blocks = vineyardToBeDisplayed.blocks;
+    var polygon = L.polygon(coordsToArray(blocks[0].coords), {
+        color: 'orange',
+        fillColor: 'orange',
+        fillOpacity: 0.5
+    }).addTo(map);
+
+    polygon.on('click', () => onPolygonClick(blocks[0]));
+
+}
+
+function onPolygonClick(block) {
+    alert("You clicked the block " + block.name);
+}
+
+function coordsToArray(coordsObj) {
+    return coordsObj.map(c => [c.lat, c.lng]);
 }
 
 export default Map;

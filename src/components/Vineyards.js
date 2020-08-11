@@ -66,8 +66,6 @@ const Vineyards = ({vineyardData}) => {
         textShadow: "0px 1px 0px #aade7c",
         boxShadow: "inherit"
     }
-    const sensorIcon = 'https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_60,h_60/https://dashboard.snapcraft.io/site_media/appmedia/2018/11/indicator-sensors_r8EdpLP.png';
-    const warnIcon = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Page_issue_icon_-_medium.svg/200px-Page_issue_icon_-_medium.svg.png';
 
     if (displayVineyards) {
         return (
