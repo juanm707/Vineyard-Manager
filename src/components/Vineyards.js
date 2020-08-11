@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import '../App.css';
-import MapView from "./MapView";
-import {Circle, Map, Marker, Polygon, Popup, TileLayer} from "react-leaflet";
+//import MapView from "./MapView";
+import * as L from 'leaflet';
+//import {Circle, Map, Marker, Polygon, Popup, TileLayer} from "react-leaflet";
+import Map from './MapView';
 
 const VineyardBox = ({vyData, displayVineyards, setV}) => {
     //console.log(vyData.vineyards[0].imgUrl);
@@ -25,7 +27,8 @@ const VineyardBox = ({vyData, displayVineyards, setV}) => {
             }
         }, 50);
 
-        setV(vyData.name);
+        setV(vyData);
+        console.log(vyData);
     }
 
     return (
@@ -47,7 +50,7 @@ const Vineyards = ({vineyardData}) => {
     const [vineyards, setVineyards] = useState(vineyardData.vineyards);
     const [displayVineyards, setDisplayVineyards] = useState(true);
 
-    const [vineyardToBeDisplayed, setVineyardToBeDisplayed] = useState("");
+    const [vineyardToBeDisplayed, setVineyardToBeDisplayed] = useState(null);
     const [options, setOptions] = useState([false, false, false]); //map, lwp, ce
 
     const greenSelectedStyle = {
@@ -63,6 +66,8 @@ const Vineyards = ({vineyardData}) => {
         textShadow: "0px 1px 0px #aade7c",
         boxShadow: "inherit"
     }
+    const sensorIcon = 'https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_60,h_60/https://dashboard.snapcraft.io/site_media/appmedia/2018/11/indicator-sensors_r8EdpLP.png';
+    const warnIcon = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Page_issue_icon_-_medium.svg/200px-Page_issue_icon_-_medium.svg.png';
 
     if (displayVineyards) {
         return (
@@ -71,28 +76,54 @@ const Vineyards = ({vineyardData}) => {
             </div>
         );
     } else {
+
+        const createMap = () => {
+            console.log('createMap function');
+
+            var mapDiv = document.getElementById('map');
+            mapDiv.style.width = '100%';
+            mapDiv.style.height = '500px';
+
+            setOptions([true, false, false])
+
+            const vineyardCoords = [vineyardToBeDisplayed.vineCenterCoords.lat, vineyardToBeDisplayed.vineCenterCoords.lng];
+            var map = L.map('map').setView(vineyardCoords, 17);
+
+            L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            }).addTo(map)
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+               attribution:  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            }).addTo(map);
+
+            L.marker(vineyardCoords).addTo(map)
+                .bindPopup(vineyardToBeDisplayed.name)
+                .openPopup();
+        }
+
+        const backToVineyards = () => {
+            setDisplayVineyards(true);
+            setOptions([false, false, false]);
+            setVineyardToBeDisplayed(null);
+        }
+
         // WHY DOES OPACITY TO CHANGE TO 0 IN fadeEffect FUNC ABOVE?! HAVE TO STYLE IT...
         return (
             <div className="VineyardInfoBox" style={{opacity: 1}}>
-                <h2>{vineyardToBeDisplayed}</h2>
-                <div className="VineyardInfoBox-Buttons">
-                    <button type="submit" style={options[0] ? greenSelectedStyle : null}
-                            onClick={() => setOptions([true, false, false])}>Map</button>
-                    <button type="submit" style={options[1] ? greenSelectedStyle : null}
-                            onClick={() => setOptions([false, true, false])}>Leaf Water Potentials</button>
-                    <button type="submit" style={options[2] ? greenSelectedStyle : null}
-                            onClick={() => setOptions([false, false, true])}>Crop Estimates</button>
+                <div className="VineyardInfoBox-Header">
+                    <h2>{vineyardToBeDisplayed.name}</h2>
+                    <div className="VineyardInfoBox-Buttons">
+                        <button type="submit" style={options[0] ? greenSelectedStyle : null}
+                                onClick={() => createMap()}>Map</button>
+                        <button type="submit" style={options[1] ? greenSelectedStyle : null}
+                                onClick={() => setOptions([false, true, false])}>Leaf Water Potentials</button>
+                        <button type="submit" style={options[2] ? greenSelectedStyle : null}
+                                onClick={() => setOptions([false, false, true])}>Crop Estimates</button>
+                    </div>
                 </div>
-                <Map className='map' center={[38.566336,-122.565644]} zoom={13}>
-                    <TileLayer
-                        attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-                        url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                    />
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-                        url='https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png'
-                    />
-                </Map>
+                <Map />
+                <button style={!options[0] ? ({float: 'left'}) : null } className="BackButton" onClick={() => {backToVineyards()}}>Back to vineyards</button>
             </div>
         );
     }

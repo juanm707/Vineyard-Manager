@@ -121,7 +121,7 @@ input[type=text], input[type=password] {
   padding: 5px;
   background: white;
   border-radius: 35px;
-  margin: 5px;
+  margin: 10px;
   box-shadow: 0px 17px 39px 5px rgba(70, 9, 97, 0.58);
   animation: fadeIn ease 3s;
 }
@@ -141,6 +141,7 @@ input[type=text], input[type=password] {
   font-family: 'Montaga', serif;
   float: left;
   margin-top: 0;
+  margin-right: 1em;
 }
 
 .VineyardInfoBox-Buttons {
@@ -164,6 +165,11 @@ input[type=text], input[type=password] {
   text-decoration:none;
   text-shadow:0px 1px 0px #aade7c;
 }
+
+.VineyardInfoBox-Header {
+  margin: 10px;
+}
+
 @keyframes fadeIn {
   0% {opacity:0;}
   100% {opacity:1;}
@@ -214,8 +220,11 @@ input[type=text], input[type=password] {
 
   .VineyardInfoBox h2 {
     margin: 0.8em;
+    float: none;
   }
 }
+
+
 
 .VineyardBox-Text {
     font-family: 'Recursive', sans-serif;
@@ -228,4 +237,66 @@ input[type=text], input[type=password] {
 
 #CompanyName {
     animation: fadeIn ease 3s;
+}
+
+#map {
+  border-radius: 35px;
+}
+
+.leaflet-bar a:last-child {
+  border-bottom-left-radius: 35px;
+  border-bottom-right-radius: 35px;
+}
+
+.leaflet-bar a:first-child {
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
+}
+
+.BackButton {
+  box-shadow:inset 0px 1px 0px 0px #bee2f9;
+  background:linear-gradient(to bottom, #63b8ee 5%, #468ccf 100%);
+  background-color:#63b8ee;
+  border-radius:6px;
+  border:1px solid #3866a3;
+  display:inline-block;
+  cursor:pointer;
+  color:#14396a;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:6px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #7cacde;
+  margin: 5px;
+  /* float: left; /* keep left or center???? */
+}
+.BackButton:hover {
+  background:linear-gradient(to bottom, #468ccf 5%, #63b8ee 100%);
+  background-color:#468ccf;
+}
+.BackButton:active {
+  position:relative;
+  top:1px;
+}
+
+/* Tablets */
+@media screen and (max-width: 769px) and (min-width: 601px) {
+  .VineyardInfoBox-Header {
+    margin: 0;
+    display: grid;
+  }
+
+  .VineyardInfoBox-Header h2 {
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+
+  .BackButton {
+    float: none;
+  }
+
+  .VineyardBox {
+    margin: 5.5px;
+  }
 }
