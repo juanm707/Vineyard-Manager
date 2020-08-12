@@ -126,7 +126,7 @@ input[type=text], input[type=password] {
   animation: fadeIn ease 3s;
 }
 
-.VineyardInfoBox {
+.VineyardInfoBox, .BlockInfoBox {
     border: white;
     border-style: solid;
     padding: 5px;

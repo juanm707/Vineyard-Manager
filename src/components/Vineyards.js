@@ -1,8 +1,5 @@
 import React, {useState} from 'react';
 import '../App.css';
-//import MapView from "./MapView";
-import * as L from 'leaflet';
-//import {Circle, Map, Marker, Polygon, Popup, TileLayer} from "react-leaflet";
 import Map from './Map';
 
 const VineyardBox = ({vyData, displayVineyards, setV}) => {
@@ -88,7 +85,7 @@ const Vineyards = ({vineyardData}) => {
                     <h2>{vineyardToBeDisplayed.name}</h2>
                     <div className="VineyardInfoBox-Buttons">
                         <button type="submit" style={options[0] ? greenSelectedStyle : null}
-                                onClick={() => Map({setOptions, vineyardToBeDisplayed})}>Map</button>
+                                onClick={() => Map(options[0], {setOptions, vineyardToBeDisplayed})}>Map</button>
                         <button type="submit" style={options[1] ? greenSelectedStyle : null}
                                 onClick={() => setOptions([false, true, false])}>Leaf Water Potentials</button>
                         <button type="submit" style={options[2] ? greenSelectedStyle : null}
@@ -96,6 +93,7 @@ const Vineyards = ({vineyardData}) => {
                     </div>
                 </div>
                 <div id='map'/>
+                <div className="BlockInfoBox"/>
                 <button style={!options[0] ? ({float: 'left'}) : null } className="BackButton" onClick={() => {backToVineyards()}}>Back to vineyards</button>
             </div>
         );
