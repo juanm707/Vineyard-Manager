@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, componentDidUpdate} from 'react';
 import '../App.css';
 import Map from './Map';
 
@@ -71,6 +71,8 @@ const Vineyards = ({vineyardData}) => {
             </div>
         );
     } else {
+        let isTablet = window.matchMedia("screen and (max-width: 769px)").matches;
+        console.log(isTablet);
 
         const backToVineyards = () => {
             setDisplayVineyards(true);
@@ -94,7 +96,7 @@ const Vineyards = ({vineyardData}) => {
                 </div>
                 <div id='map'/>
                 <div className="BlockInfoBox"/>
-                <button style={!options[0] ? ({float: 'left'}) : null } className="BackButton" onClick={() => {backToVineyards()}}>Back to vineyards</button>
+                <button className="BackButton" onClick={() => {backToVineyards()}}>Back to vineyards</button>
             </div>
         );
     }

@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 
 const sensorIcon = 'https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_60,h_60/https://dashboard.snapcraft.io/site_media/appmedia/2018/11/indicator-sensors_r8EdpLP.png';
 const warnIcon = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Page_issue_icon_-_medium.svg/200px-Page_issue_icon_-_medium.svg.png';
+var blockInfoShown = false;
 
 const Map = (mapInitialized, {setOptions, vineyardToBeDisplayed}) => {
 
@@ -59,10 +60,35 @@ function onPolygonClick(event, block) {
     console.log('Event target options', event.target.options);
 
     let isMobileOrTablet = window.matchMedia("screen and (max-width: 769px)").matches;
+    var blockInfoBx = document.getElementsByClassName('BlockInfoBox')[0];
+    var vineInfoBx = document.getElementsByClassName('VineyardInfoBox')[0];
+    var mapp = document.getElementById('map');
+
     if (isMobileOrTablet) {
+        if (blockInfoShown) {
+            vineInfoBx.style.width = 'inherit';
+
+            mapp.style.width = '100%';
+            mapp.style.display = 'block';
+
+            blockInfoBx.style.display = 'none';
+            blockInfoShown = false;
+        }
         const blockInfo = `Block: ${block.name}\nVariety: ${block.variety}\nRoot-stock: ${block.rootstock}\nSpacing: ${block.spacing}\nAcres: ${block.acres}\nVines: ${block.vines}\nRows: ${block.rows}\nNum. of Sensors: ${block.sensors.length}`;
         setTimeout(() => alert(blockInfo), 300); // Alerted faster than polygon changed color
     } else {
+        // first reveal the box and set up everything
+        if (!blockInfoShown) {
+            vineInfoBx.style.width = '90%';
+
+            mapp.style.width = '80%';
+            mapp.style.display = 'inline-block';
+
+            blockInfoBx.style.display = 'block';
+            blockInfoShown = true;
+
+            console.log(vineInfoBx);
+        }
         console.log('Event target', event.target._path);
     }
 }
