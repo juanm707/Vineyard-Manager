@@ -96,6 +96,7 @@ const Vineyards = ({vineyardData}) => {
                 </div>
                 <div id='map'/>
                 <button className="BackButton" onClick={() => {backToVineyards()}}>Back to vineyards</button>
+                <button id="AddBlockButton" className="BackButton">Add New Block</button>
             </div>
         );
     }

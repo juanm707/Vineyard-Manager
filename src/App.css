@@ -259,6 +259,10 @@ input[type=text], input[type=password] {
   top:1px;
 }
 
+#AddBlockButton {
+  display: none;
+}
+
 /* Tablets */
 @media screen and (max-width: 769px) and (min-width: 601px) {
   .VineyardInfoBox-Header {

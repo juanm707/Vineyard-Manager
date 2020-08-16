@@ -9,6 +9,9 @@ const Map = (mapInitialized, {setOptions, vineyardToBeDisplayed}) => {
 
     if (mapInitialized) return;
 
+    var addBB = document.getElementById('AddBlockButton');
+    addBB.style.display = 'block';
+
     var mapDiv = document.getElementById('map');
     mapDiv.style.width = '100%';
     mapDiv.style.height = '500px';
