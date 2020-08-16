@@ -1,5 +1,8 @@
 import '../App.css';
-import * as L from 'leaflet';
+import L from 'leaflet';
+import "leaflet-draw";
+import "leaflet-draw/dist/leaflet.draw.css";
+
 
 const sensorIcon = 'https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_60,h_60/https://dashboard.snapcraft.io/site_media/appmedia/2018/11/indicator-sensors_r8EdpLP.png';
 const warnIcon = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Page_issue_icon_-_medium.svg/200px-Page_issue_icon_-_medium.svg.png';
@@ -19,7 +22,39 @@ const Map = (mapInitialized, {setOptions, vineyardToBeDisplayed}) => {
     setOptions([true, false, false])
 
     const vineyardCoords = [vineyardToBeDisplayed.vineCenterCoords.lat, vineyardToBeDisplayed.vineCenterCoords.lng];
+
     var map = L.map('map').setView(vineyardCoords, 17);
+
+    var drawControl = new L.Control.Draw({
+        draw: {
+            polyline: false,
+            rectangle: false,
+            circle: false,
+            circlemarker: false,
+            polygon: {
+                shapeOptions: {
+                    color: 'orange'
+                }
+            }
+        }
+    });
+    map.addControl(drawControl);
+
+    map.on(L.Draw.Event.CREATED, function f(e) {
+        map.addLayer(e.layer);
+    });
+
+    // var drawnItems = new L.FeatureGroup();
+    // console.log('Drawn Items', drawnItems);
+    //
+    // map.addLayer(drawnItems);
+    // var drawControl = new L.Control.Draw({
+    //     edit: {
+    //         featureGroup: drawnItems
+    //     }
+    // });
+    // console.log('drawControl', drawControl);
+    // map.addControl(drawControl);
 
     L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
@@ -33,7 +68,6 @@ const Map = (mapInitialized, {setOptions, vineyardToBeDisplayed}) => {
         .bindPopup(vineyardToBeDisplayed.name)
         .openPopup();
 
-    //console.log(vineyardToBeDisplayed);
     const blocks = vineyardToBeDisplayed.blocks;
     blocks.forEach(b => {
        var p = L.polygon(coordsToArray(b.coords), {
