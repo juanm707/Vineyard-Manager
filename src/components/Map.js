@@ -39,6 +39,11 @@ const Map = (mapInitialized, {setOptions, vineyardToBeDisplayed}) => {
            fillOpacity: 0.3
        }).addTo(map);
        p.on('click', (event) => onPolygonClick(event, b));
+       const blockInfo = `Block: ${b.name}\nVariety: ${b.variety}\nRoot-stock: ${b.rootstock}\nSpacing: ${b.spacing}\nAcres: ${b.acres}\nVines: ${b.vines}\nRows: ${b.rows}\nNum. of Sensors: ${b.sensors.length}`;
+       p.bindPopup(blockInfo, {
+           maxWidth: 105,
+           keepInView: true
+       });
     });
 }
 
@@ -55,41 +60,6 @@ function onPolygonClick(event, block) {
 
         event.target._path.setAttribute('stroke', 'purple');
         event.target._path.setAttribute('fill', 'purple');
-    }
-
-    console.log('Event target options', event.target.options);
-
-    let isMobileOrTablet = window.matchMedia("screen and (max-width: 769px)").matches;
-    var blockInfoBx = document.getElementsByClassName('BlockInfoBox')[0];
-    var vineInfoBx = document.getElementsByClassName('VineyardInfoBox')[0];
-    var mapp = document.getElementById('map');
-
-    if (isMobileOrTablet) {
-        if (blockInfoShown) {
-            vineInfoBx.style.width = 'inherit';
-
-            mapp.style.width = '100%';
-            mapp.style.display = 'block';
-
-            blockInfoBx.style.display = 'none';
-            blockInfoShown = false;
-        }
-        const blockInfo = `Block: ${block.name}\nVariety: ${block.variety}\nRoot-stock: ${block.rootstock}\nSpacing: ${block.spacing}\nAcres: ${block.acres}\nVines: ${block.vines}\nRows: ${block.rows}\nNum. of Sensors: ${block.sensors.length}`;
-        setTimeout(() => alert(blockInfo), 300); // Alerted faster than polygon changed color
-    } else {
-        // first reveal the box and set up everything
-        if (!blockInfoShown) {
-            vineInfoBx.style.width = '90%';
-
-            mapp.style.width = '80%';
-            mapp.style.display = 'inline-block';
-
-            blockInfoBx.style.display = 'block';
-            blockInfoShown = true;
-
-            console.log(vineInfoBx);
-        }
-        console.log('Event target', event.target._path);
     }
 }
 
