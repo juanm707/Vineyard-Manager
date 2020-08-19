@@ -38,9 +38,11 @@ const Map = (mapInitialized, {setOptions, vineyardToBeDisplayed}) => {
             }
         }
     });
+
     map.addControl(drawControl);
 
     map.on(L.Draw.Event.CREATED, function f(e) {
+        //add to database? the coords
         map.addLayer(e.layer);
     });
 
@@ -64,8 +66,10 @@ const Map = (mapInitialized, {setOptions, vineyardToBeDisplayed}) => {
         attribution:  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
     }).addTo(map);
 
+    // "<table><tr><td>Cell 1</td></tr><tr><td>Cell 2</td></tr></table>"
+
     L.marker(vineyardCoords).addTo(map)
-        .bindPopup(vineyardToBeDisplayed.name)
+        .bindPopup(`<table><tr><td>${vineyardToBeDisplayed.name}</td><tr><td>(${vineyardCoords.toString()})</td></tr></table>`)
         .openPopup();
 
     const blocks = vineyardToBeDisplayed.blocks;
@@ -76,9 +80,9 @@ const Map = (mapInitialized, {setOptions, vineyardToBeDisplayed}) => {
            fillOpacity: 0.3
        }).addTo(map);
        p.on('click', (event) => onPolygonClick(event, b));
-       const blockInfo = `Block: ${b.name}\nVariety: ${b.variety}\nRoot-stock: ${b.rootstock}\nSpacing: ${b.spacing}\nAcres: ${b.acres}\nVines: ${b.vines}\nRows: ${b.rows}\nNum. of Sensors: ${b.sensors.length}`;
+       
+       const blockInfo = `<table><tr><td>Block:</td><td>${b.name}</td></tr><tr><td>Variety:</td><td>${b.variety}</td></tr><tr><td>Root-stock:</td><td>${b.rootstock}</td><tr><td>Spacing:</td><td>${b.spacing}</td></tr><tr><td>Acres:</td><td>${b.acres}</td></tr><tr><td>Vines:</td><td>${b.vines}</td></tr><tr><td>Rows:</td><td>${b.rows}</td></tr><tr><td>Num. of Sensors:</td><td>${b.sensors.length}</td></tr></table>`;
        p.bindPopup(blockInfo, {
-           maxWidth: 105,
            keepInView: true
        });
     });
