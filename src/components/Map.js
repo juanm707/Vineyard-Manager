@@ -9,7 +9,10 @@ var blockInfoShown = false;
 
 const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
     document.getElementsByClassName('chart-container')[0].style.display = 'none';
-    document.getElementsByTagName('button')[0].style = "background-color: #77d42a; border-radius: 6px; border: 1px solid #268a16; cursor: pointer; color: #306108; font-family: Arial; font-size: 15px; font-weight: bold; text-decoration: none; text-shadow: 0px 1px 0px #aade7c; box-shadow: inherit";
+    document.getElementsByTagName('button')[0].style = "background-color: #77d42a; border-radius: 6px; " +
+        "border: 1px solid #268a16; cursor: pointer; color: #306108; " +
+        "font-family: Arial; font-size: 15px; font-weight: bold; " +
+        "text-decoration: none; text-shadow: 0px 1px 0px #aade7c; box-shadow: inherit";
 
     if (mapInit) {
         setOptions([true, false, false]);
