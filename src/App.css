@@ -169,6 +169,7 @@ input[type=text], input[type=password] {
 
 .VineyardInfoBox-Header {
   margin: 10px;
+  overflow: hidden;
 }
 
 @keyframes fadeIn {
@@ -205,7 +206,7 @@ input[type=text], input[type=password] {
 }
 
 .VineyardBox-Text {
-    font-family: 'Recursive', sans-serif;
+    font-family: 'Montaga', serif;
     height: 50%;
 }
 
@@ -231,6 +232,10 @@ input[type=text], input[type=password] {
   border-top-right-radius: 35px;
 }
 
+.leaflet-top, .leaflet-left {
+  margin-top: 10px;
+}
+
 .BackButton {
   box-shadow: inset 0px 1px 0px 0px #bee2f9;
   background: linear-gradient(to bottom, #63b8ee 5%, #468ccf 100%);
@@ -248,7 +253,7 @@ input[type=text], input[type=password] {
   text-shadow: 0px 1px 0px #7cacde;
   margin: 5px;
   margin-top: 10px;
-  float: left; /* keep left or center???? */
+  /*float: left; /* keep left or center???? */
 }
 .BackButton:hover {
   background:linear-gradient(to bottom, #468ccf 5%, #63b8ee 100%);
@@ -257,10 +262,6 @@ input[type=text], input[type=password] {
 .BackButton:active {
   position:relative;
   top:1px;
-}
-
-#AddBlockButton {
-  display: none;
 }
 
 /* Tablets */

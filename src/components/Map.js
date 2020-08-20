@@ -3,17 +3,24 @@ import L from 'leaflet';
 import "leaflet-draw";
 import "leaflet-draw/dist/leaflet.draw.css";
 
-
 const sensorIcon = 'https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_60,h_60/https://dashboard.snapcraft.io/site_media/appmedia/2018/11/indicator-sensors_r8EdpLP.png';
 const warnIcon = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Page_issue_icon_-_medium.svg/200px-Page_issue_icon_-_medium.svg.png';
 var blockInfoShown = false;
 
-const Map = (mapInitialized, {setOptions, vineyardToBeDisplayed}) => {
+const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
+    document.getElementsByClassName('chart-container')[0].style.display = 'none';
+    document.getElementsByTagName('button')[0].style = "background-color: #77d42a; border-radius: 6px; border: 1px solid #268a16; cursor: pointer; color: #306108; font-family: Arial; font-size: 15px; font-weight: bold; text-decoration: none; text-shadow: 0px 1px 0px #aade7c; box-shadow: inherit";
 
-    if (mapInitialized) return;
+    if (mapInit) {
+        setOptions([true, false, false]);
+        document.getElementById('map').style.display = 'block';
+        return;
+    }
 
-    var addBB = document.getElementById('AddBlockButton');
-    addBB.style.display = 'block';
+    setOptions([true, false, false]);
+
+    var bToV = document.getElementById('backBtn');
+    bToV.style.float = 'left';
 
     var mapDiv = document.getElementById('map');
     mapDiv.style.width = '100%';

@@ -1,6 +1,7 @@
-import React, {useState, componentDidUpdate} from 'react';
+import React, {useState, useEffect} from 'react';
 import '../App.css';
 import Map from './Map';
+import LeafWaterPotential from "./LeafWaterPotential";
 
 const VineyardBox = ({vyData, displayVineyards, setV}) => {
     //console.log(vyData.vineyards[0].imgUrl);
@@ -10,7 +11,6 @@ const VineyardBox = ({vyData, displayVineyards, setV}) => {
         // console.log(event.target);
 
         var vineyardListFadeTarget = document.getElementsByClassName("Vineyards")[0];
-        console.log('Faded class', vineyardListFadeTarget.className);
 
         var fadeEffect = setInterval(() => {
             if (!vineyardListFadeTarget.style.opacity) {
@@ -71,8 +71,8 @@ const Vineyards = ({vineyardData}) => {
             </div>
         );
     } else {
-        let isTablet = window.matchMedia("screen and (max-width: 769px)").matches;
-        console.log(isTablet);
+        //let isTablet = window.matchMedia("screen and (max-width: 769px)").matches;
+        //console.log(isTablet);
 
         const backToVineyards = () => {
             setDisplayVineyards(true);
@@ -89,14 +89,16 @@ const Vineyards = ({vineyardData}) => {
                         <button type="submit" style={options[0] ? greenSelectedStyle : null}
                                 onClick={() => Map(options[0], {setOptions, vineyardToBeDisplayed})}>Map</button>
                         <button type="submit" style={options[1] ? greenSelectedStyle : null}
-                                onClick={() => setOptions([false, true, false])}>Leaf Water Potentials</button>
+                                onClick={() => LeafWaterPotential(options[0], {setOptions, vineyardToBeDisplayed})}>Leaf Water Potentials</button>
                         <button type="submit" style={options[2] ? greenSelectedStyle : null}
                                 onClick={() => setOptions([false, false, true])}>Crop Estimates</button>
                     </div>
                 </div>
                 <div id='map'/>
-                <button className="BackButton" onClick={() => {backToVineyards()}}>Back to vineyards</button>
-                <button id="AddBlockButton" className="BackButton">Add New Block</button>
+                <div className="chart-container" style={{position: "relative", height: "500px", width: "100%", display: "none"}}>
+                    <canvas id='lwpChart' style={{display: "none"}}/>
+                </div>
+                <button id="backBtn" className="BackButton" onClick={() => {backToVineyards()}}>Back to vineyards</button>
             </div>
         );
     }
