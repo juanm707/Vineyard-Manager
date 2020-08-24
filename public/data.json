@@ -204,8 +204,8 @@
             {
               "name": "Sensor A",
               "coords": {
-                "lat": 38.566859,
-                "lng": -122.56573
+                "lat": 38.566479,
+                "lng": -122.565107
               },
               "temperature": 90,
               "humidity": 29

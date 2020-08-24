@@ -16,6 +16,16 @@ var warningMarker = L.Icon.extend({
     }
 });
 
+var sensorMarker = L.Icon.extend({
+    options: {
+        shadowUrl: null,
+        iconAnchor: new L.Point(12.5, 41),
+        iconSize: new L.Point(25, 41),
+        popupAnchor: new L.Point(0, -41),
+        iconUrl: sensorIcon
+    }
+});
+
 const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
 
     document.getElementsByClassName('chart-container')[0].style.display = 'none';
@@ -95,6 +105,7 @@ const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
     // console.log('drawControl', drawControl);
     // map.addControl(drawControl);
 
+    // main tile layers, satellite, and names of cities and streets
     L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
     }).addTo(map)
@@ -103,12 +114,12 @@ const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
         attribution:  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
     }).addTo(map);
 
-    // "<table><tr><td>Cell 1</td></tr><tr><td>Cell 2</td></tr></table>"
-
+    // center vineyard marker
     L.marker(vineyardCoords).addTo(map)
         .bindPopup(`<table><tr><td>${vineyardToBeDisplayed.name}</td><tr><td>(${vineyardCoords.toString()})</td></tr></table>`)
         .openPopup();
 
+    // adding blocks to map
     const blocks = vineyardToBeDisplayed.blocks;
     blocks.forEach(b => {
        var p = L.polygon(coordsToArray(b.coords), {
@@ -116,12 +127,32 @@ const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
            fillColor: 'orange',
            fillOpacity: 0.3
        }).addTo(map);
+
        p.on('click', (event) => onPolygonClick(event, b));
        
        const blockInfo = `<table><tr><td>Block:</td><td>${b.name}</td></tr><tr><td>Variety:</td><td>${b.variety}</td></tr><tr><td>Root-stock:</td><td>${b.rootstock}</td><tr><td>Spacing:</td><td>${b.spacing}</td></tr><tr><td>Acres:</td><td>${b.acres}</td></tr><tr><td>Vines:</td><td>${b.vines}</td></tr><tr><td>Rows:</td><td>${b.rows}</td></tr><tr><td>Num. of Sensors:</td><td>${b.sensors.length}</td></tr></table>`;
        p.bindPopup(blockInfo, {
            keepInView: true
        });
+    });
+
+    // adding sensors to map
+    let sensors = [];
+    blocks.forEach(bl => {
+        bl.sensors.forEach(s => {
+            sensors = sensors.concat(s);
+        });
+    });
+
+    sensors.forEach(s => {
+        var sensOnMap = L.marker([s.coords.lat, s.coords.lng], {
+            icon: new sensorMarker()
+        }).addTo(map);
+
+        const sensorText = `Temperature: ${s.temperature}° | Humidity: ${s.humidity}%`;
+        sensOnMap.bindPopup(sensorText, {
+            keepInView: true
+        });
     });
 }
 
