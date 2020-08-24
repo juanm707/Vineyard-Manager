@@ -136,7 +136,7 @@ const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
        });
     });
 
-    // adding sensors to map
+    // adding sensors to map, in marker pane to hide markers? like check box options
     let sensors = [];
     blocks.forEach(bl => {
         bl.sensors.forEach(s => {
@@ -154,6 +154,14 @@ const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
             keepInView: true
         });
     });
+
+    // add warning icon to map
+    var warnMark = L.marker([38.565626,-122.565143], {
+        icon: new warningMarker()
+    }).addTo(map)
+        .bindPopup('This is an example of an issue, broken pipe, diseases, other icons can be used.', {
+            keepInView: true
+        });
 }
 
 function onPolygonClick(event, block) {
