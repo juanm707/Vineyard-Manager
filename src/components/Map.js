@@ -6,8 +6,18 @@ import "leaflet-draw/dist/leaflet.draw.css";
 const sensorIcon = 'https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_60,h_60/https://dashboard.snapcraft.io/site_media/appmedia/2018/11/indicator-sensors_r8EdpLP.png';
 const warnIcon = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Page_issue_icon_-_medium.svg/200px-Page_issue_icon_-_medium.svg.png';
 var blockInfoShown = false;
+var warningMarker = L.Icon.extend({
+    options: {
+        shadowUrl: null,
+        iconAnchor: new L.Point(12.5, 12.5),
+        iconSize: new L.Point(20, 20),
+        popupAnchor: new L.Point(0, -41),
+        iconUrl: warnIcon
+    }
+});
 
 const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
+
     document.getElementsByClassName('chart-container')[0].style.display = 'none';
     document.getElementsByTagName('button')[0].style = "background-color: #77d42a; border-radius: 6px; " +
         "border: 1px solid #268a16; cursor: pointer; color: #306108; " +
@@ -45,15 +55,32 @@ const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
                 shapeOptions: {
                     color: 'orange'
                 }
+            },
+            marker: {
+                icon: new warningMarker()
             }
         }
     });
 
+    // Set the button title text for the polygon button
+    L.drawLocal.draw.toolbar.buttons.marker = 'Add a notice';
+    L.drawLocal.draw.toolbar.buttons.polygon = 'Add a new block'
+
+    // Set the tooltip start text for the rectangle
+    L.drawLocal.draw.handlers.polygon.tooltip.start = 'Click to start outlining new block';
+
     map.addControl(drawControl);
 
+    // On layer creation
     map.on(L.Draw.Event.CREATED, function f(e) {
+        var type = e.layerType,
+            layer = e.layer;
+
+        if (type === 'marker') {
+            layer.bindPopup('A warning/issue/notice!');
+        }
         //add to database? the coords
-        map.addLayer(e.layer);
+        map.addLayer(layer);
     });
 
     // var drawnItems = new L.FeatureGroup();

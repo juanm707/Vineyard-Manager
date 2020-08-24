@@ -91,7 +91,7 @@ const Vineyards = ({vineyardData}) => {
                         <button type="submit" style={options[1] ? greenSelectedStyle : null}
                                 onClick={() => LeafWaterPotential(options[0], {setOptions, vineyardToBeDisplayed})}>Leaf Water Potentials</button>
                         <button type="submit" style={options[2] ? greenSelectedStyle : null}
-                                onClick={() => setOptions([false, false, true])}>Crop Estimates</button>
+                                onClick={() => setOptions([true, false, true])}>Crop Estimates</button>
                     </div>
                 </div>
                 <div id='map'/>
