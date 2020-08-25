@@ -14,6 +14,7 @@ const LeafWaterPotentialChart = (mapInit, {setOptions, vineyardToBeDisplayed}) =
     }
 
     document.getElementsByClassName('chart-container')[0].style.display = 'block';
+    document.getElementsByClassName('blueTable')[0].style.display = 'block';
     document.getElementById('lwpChart').style.display = 'block';
     var ctx = document.getElementById('lwpChart').getContext('2d');
     var chart = new Chart(ctx, {
@@ -59,7 +60,7 @@ const LeafWaterPotentialChart = (mapInit, {setOptions, vineyardToBeDisplayed}) =
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: 'Pressure'
+                        labelString: 'Bars'
                     }
                 }],
                 xAxes: [{

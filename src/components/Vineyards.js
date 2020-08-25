@@ -95,6 +95,50 @@ const Vineyards = ({vineyardData}) => {
                     </div>
                 </div>
                 <div id='map'/>
+                <div>
+                    <table className="blueTable" style={{display: "none"}}>
+                        <thead>
+                        <tr>
+                            <th>Block</th>
+                            <th>8/10</th>
+                            <th>8/17</th>
+                            <th>Curr Rdg.</th>
+                            <th>Phenology</th>
+                            <th>Sht Tip Rtg.</th>
+                            <th>Comments</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>10</td>
+                            <td>13</td>
+                            <td style={{backgroundColor: getReadingColor(12)}}><strong>12</strong></td>
+                            <td>Veraison</td>
+                            <td>5</td>
+                            <td>SUN DAMAGE, LOW CANOPY</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>7</td>
+                            <td>9</td>
+                            <td style={{backgroundColor: getReadingColor(11)}}><strong>11</strong></td>
+                            <td>Veraison</td>
+                            <td>5</td>
+                            <td>THIS COMMENT IS LONG TO SEE HOW IT AFFECTS THE TABLE</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>9</td>
+                            <td>8</td>
+                            <td style={{backgroundColor: getReadingColor(7)}}><strong>7</strong></td>
+                            <td>Veraison</td>
+                            <td>5</td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div className="chart-container" style={{position: "relative", height: "500px", width: "100%", display: "none"}}>
                     <canvas id='lwpChart' style={{display: "none"}}/>
                 </div>
@@ -102,6 +146,15 @@ const Vineyards = ({vineyardData}) => {
             </div>
         );
     }
+}
+
+function getReadingColor(reading) {
+    if (reading >= 12) return '#ff9933';
+    else if (reading >= 11 && reading <= 11.9) return '#ffcc66';
+    else if (reading >= 10 && reading <= 10.9) return '#ffffcc';
+    else if (reading >= 9 && reading <= 9.9) return '#ffffff';
+    else if (reading >= 8 && reading <= 8.9) return '#ccff99';
+    else if (reading < 8) return '#66cc00';
 }
 
 export default Vineyards;
