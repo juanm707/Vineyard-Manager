@@ -23,8 +23,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 **NOT FINAL**
 
+[Quick web demo](https://gfycat.com/insistentpolishedgentoopenguin)
 [Quick mobile demo](https://gfycat.com/offensivelonelybrahmanbull)
-
 
 ## Tools
 * React.js
