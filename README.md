@@ -10,9 +10,9 @@ More features to be added in the future
 
 Download/Clone and then in the project directory, you can run:
 
-### `npm install`
+# `npm install`
 
-### `npm start`
+# `npm start`
 
 Runs the app in the development mode.
 
@@ -23,7 +23,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 **NOT FINAL**
 
-Quick mobile demo [https://gfycat.com/offensivelonelybrahmanbull]
+[https://gfycat.com/offensivelonelybrahmanbull](Quick mobile demo)
 
 
 
