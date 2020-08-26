@@ -23,7 +23,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 **NOT FINAL**
 
-<img alt="Quick demo" src="https://media.giphy.com/media/dwF8Br5GpLxzVGlzrz/giphy.gif">
+<img alt="Quick web demo" src="https://media.giphy.com/media/THagCoDNFCTekEhhwX/giphy.gif">
+<img alt="Quick mobile demo" src="">
+
 
 
 ## Tools
