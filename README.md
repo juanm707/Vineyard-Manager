@@ -24,7 +24,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 **NOT FINAL**
 
 <img alt="Quick web demo" src="">
-<img alt="Quick mobile demo" src="https://gfycat.com/offensivelonelybrahmanbull">
+<a alt="Quick mobile demo" src="https://gfycat.com/offensivelonelybrahmanbull">
 
 
 
