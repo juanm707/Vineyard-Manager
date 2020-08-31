@@ -84,6 +84,7 @@ const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
 
     // On layer creation
     map.on(L.Draw.Event.CREATED, function f(e) {
+        // console.log(e); //coords is layer -> editing -> latlngs
         var type = e.layerType,
             layer = e.layer;
 
@@ -135,6 +136,9 @@ const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
        p.bindPopup(blockInfo, {
            keepInView: true
        });
+
+       p.bindTooltip(b.name,
+           {permanent: true, direction:"auto", opacity: 0.6}).openTooltip();
     });
 
     // adding sensors to map, in marker pane to hide markers? like check box options

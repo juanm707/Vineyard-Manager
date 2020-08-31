@@ -99,7 +99,7 @@ const Vineyards = ({vineyardData}) => {
                     <table className="blueTable" style={{display: "none"}}>
                         <thead>
                         <tr>
-                            <th>Block</th>
+                            <th style={{borderRight: "2px solid black"}}>Block</th>
                             <th>8/10</th>
                             <th>8/17</th>
                             <th>Curr Rdg.</th>
@@ -110,7 +110,7 @@ const Vineyards = ({vineyardData}) => {
                         </thead>
                         <tbody>
                         <tr>
-                            <td>1</td>
+                            <td style={{borderRight: "2px solid black"}}>1</td>
                             <td>10</td>
                             <td>13</td>
                             <td style={{backgroundColor: getReadingColor(12)}}><strong>12</strong></td>
@@ -119,7 +119,7 @@ const Vineyards = ({vineyardData}) => {
                             <td>SUN DAMAGE, LOW CANOPY</td>
                         </tr>
                         <tr>
-                            <td>2</td>
+                            <td style={{borderRight: "2px solid black"}}>2</td>
                             <td>7</td>
                             <td>9</td>
                             <td style={{backgroundColor: getReadingColor(11)}}><strong>11</strong></td>
@@ -128,7 +128,7 @@ const Vineyards = ({vineyardData}) => {
                             <td>THIS COMMENT IS LONG TO SEE HOW IT AFFECTS THE TABLE</td>
                         </tr>
                         <tr>
-                            <td>3</td>
+                            <td style={{borderRight: "2px solid black"}}>3</td>
                             <td>9</td>
                             <td>8</td>
                             <td style={{backgroundColor: getReadingColor(7)}}><strong>7</strong></td>
