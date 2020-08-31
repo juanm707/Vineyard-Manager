@@ -23,7 +23,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 **NOT FINAL**
 
-[Quick web demo](soon)
+[Quick web demo](https://youtu.be/wDapmu2LlQU)
 
 [Quick mobile demo](https://gfycat.com/offensivelonelybrahmanbull)
 
