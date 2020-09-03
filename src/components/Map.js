@@ -113,7 +113,7 @@ const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
     }).addTo(map)
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
-        attribution:  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
     }).addTo(map);
 
     // center vineyard marker
@@ -124,21 +124,21 @@ const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
     // adding blocks to map
     const blocks = vineyardToBeDisplayed.blocks;
     blocks.forEach(b => {
-       var p = L.polygon(coordsToArray(b.coords), {
-           color: 'orange',
-           fillColor: 'orange',
-           fillOpacity: 0.3
-       }).addTo(map);
+        var p = L.polygon(coordsToArray(b.coords), {
+            color: 'orange',
+            fillColor: 'orange',
+            fillOpacity: 0.3
+        }).addTo(map);
 
-       p.on('click', (event) => onPolygonClick(event, b));
-       
-       const blockInfo = `<table><tr><td>Block:</td><td>${b.name}</td></tr><tr><td>Variety:</td><td>${b.variety}</td></tr><tr><td>Root-stock:</td><td>${b.rootstock}</td><tr><td>Spacing:</td><td>${b.spacing}</td></tr><tr><td>Acres:</td><td>${b.acres}</td></tr><tr><td>Vines:</td><td>${b.vines}</td></tr><tr><td>Rows:</td><td>${b.rows}</td></tr><tr><td>Num. of Sensors:</td><td>${b.sensors.length}</td></tr></table>`;
-       p.bindPopup(blockInfo, {
-           keepInView: true
-       });
+        p.on('click', (event) => onPolygonClick(event, b));
 
-       p.bindTooltip(b.name,
-           {permanent: true, direction:"auto", opacity: 0.6}).openTooltip();
+        const blockInfo = `<table><tr><td>Block:</td><td>${b.name}</td></tr><tr><td>Variety:</td><td>${b.variety}</td></tr><tr><td>Root-stock:</td><td>${b.rootstock}</td><tr><td>Spacing:</td><td>${b.spacing}</td></tr><tr><td>Acres:</td><td>${b.acres}</td></tr><tr><td>Vines:</td><td>${b.vines}</td></tr><tr><td>Rows:</td><td>${b.rows}</td></tr><tr><td>Num. of Sensors:</td><td>${b.sensors.length}</td></tr></table>`;
+        p.bindPopup(blockInfo, {
+            keepInView: true
+        });
+
+        p.bindTooltip(b.name,
+            {permanent: true, direction: "auto", opacity: 0.6}).openTooltip();
     });
 
     // adding sensors to map, in marker pane to hide markers? like check box options
@@ -161,12 +161,26 @@ const Map = (mapInit, {setOptions, vineyardToBeDisplayed}) => {
     });
 
     // add warning icon to map
-    var warnMark = L.marker([38.565626,-122.565143], {
+    var warnMark = L.marker([38.565626, -122.565143], {
         icon: new warningMarker()
     }).addTo(map)
         .bindPopup('This is an example of an issue, broken pipe, diseases, other icons can be used.', {
             keepInView: true
         });
+
+    // Get user current location
+    map.locate({setView: true, maxZoom: 18});
+    map.on('locationfound', function onLocationFound(e) {
+        var radius = e.accuracy;
+
+        L.marker(e.latlng).addTo(map)
+            .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+        L.circle(e.latlng, radius).addTo(map);
+    });
+    map.on('locationerror', function onLocationError(e) {
+        alert(e.message);
+    });
 }
 
 function onPolygonClick(event, block) {

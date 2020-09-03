@@ -142,7 +142,8 @@ const Vineyards = ({vineyardData}) => {
                 <div className="chart-container" style={{position: "relative", height: "500px", width: "100%", display: "none"}}>
                     <canvas id='lwpChart' style={{display: "none"}}/>
                 </div>
-                <button id="backBtn" className="BackButton" onClick={() => {backToVineyards()}}>Back to vineyards</button>
+                <button id="backBtn" className="BackButton" onClick={() => backToVineyards()}>Back to vineyards</button>
+                <button id="getLocation" className="BackButton">Get my location</button>
             </div>
         );
     }
